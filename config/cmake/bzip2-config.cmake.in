@@ -1,0 +1,59 @@
+#-----------------------------------------------------------------------------
+# bzip2 Config file for compiling against bzip2 install directory
+#-----------------------------------------------------------------------------
+@PACKAGE_INIT@
+
+string(TOUPPER @BZ2_PACKAGE@ BZ2_PACKAGE_NAME)
+
+set (${BZ2_PACKAGE_NAME}_VALID_COMPONENTS static shared)
+
+#-----------------------------------------------------------------------------
+# User Options
+#-----------------------------------------------------------------------------
+set (${BZ2_PACKAGE_NAME}_BUILD_SHARED_LIBS    @BUILD_SHARED_LIBS@)
+set (${BZ2_PACKAGE_NAME}_EXPORT_LIBRARIES     @BZ2_LIBRARIES_TO_EXPORT@)
+
+#-----------------------------------------------------------------------------
+# Directories
+#-----------------------------------------------------------------------------
+set (${BZ2_PACKAGE_NAME}_INCLUDE_DIR "@PACKAGE_INCLUDE_INSTALL_DIR@")
+
+set (${BZ2_PACKAGE_NAME}_SHARE_DIR "@PACKAGE_SHARE_INSTALL_DIR@")
+set_and_check (${BZ2_PACKAGE_NAME}_BUILD_DIR "@PACKAGE_CURRENT_BUILD_DIR@")
+
+#-----------------------------------------------------------------------------
+# Version Strings
+#-----------------------------------------------------------------------------
+set (${BZ2_PACKAGE_NAME}_VERSION_STRING @BZ2_VERSION_STRING@)
+set (${BZ2_PACKAGE_NAME}_VERSION_MAJOR  @BZ2_VERSION_MAJOR@)
+set (${BZ2_PACKAGE_NAME}_VERSION_MINOR  @BZ2_VERSION_MINOR@)
+
+#-----------------------------------------------------------------------------
+# Don't include targets if this file is being picked up by another
+# project which has already build bzip2 as a subproject
+#-----------------------------------------------------------------------------
+if (NOT TARGET "@BZ2_PACKAGE@")
+  include (@PACKAGE_SHARE_INSTALL_DIR@/@BZ2_PACKAGE@@BZ2_PACKAGE_EXT@-targets.cmake)
+endif ()
+
+# Handle default component(static) :
+if (NOT ${BZ2_PACKAGE_NAME}_FIND_COMPONENTS)
+    set (${BZ2_PACKAGE_NAME}_FIND_COMPONENTS static)
+    set (${BZ2_PACKAGE_NAME}_FIND_REQUIRED_static true)
+endif ()
+
+# Handle requested components:
+list (REMOVE_DUPLICATES ${BZ2_PACKAGE_NAME}_FIND_COMPONENTS)
+foreach (comp IN LISTS ${BZ2_PACKAGE_NAME}_FIND_COMPONENTS)
+    list (FIND ${BZ2_PACKAGE_NAME}_EXPORT_LIBRARIES "@BZ2_LIB_CORENAME@-${comp}" HAVE_COMP)
+    if (${HAVE_COMP} LESS 0)
+      set (${BZ2_PACKAGE_NAME}_${comp}_FOUND 0)
+    else ()
+      set (${BZ2_PACKAGE_NAME}_${comp}_FOUND 1)
+      string(TOUPPER ${BZ2_PACKAGE_NAME}_${comp}_LIBRARY COMP_LIBRARY)
+      set (${COMP_LIBRARY} ${${COMP_LIBRARY}} @BZ2_LIB_CORENAME@-${comp})
+      set (${BZ2_PACKAGE_NAME}_LIBRARIES ${${BZ2_PACKAGE_NAME}_LIBRARIES} bz2-${comp})
+    endif ()
+endforeach()
+
+check_required_components(${BZ2_PACKAGE_NAME})

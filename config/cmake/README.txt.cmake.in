@@ -1,0 +1,78 @@
+@BZ2_PACKAGE_NAME@ version @BZ2_PACKAGE_VERSION_STRING@
+------------------------------------------------------------------------------
+
+This package was modified by The HDF Group to provide CMake support
+Moved sources to sub-folders.
+Added CMake and Autotools configuration files.
+
+bzip2's "home" is http://www.bzip.org/
+
+===================================================================
+excepts from README, see README for full information
+===================================================================
+
+This is the README for bzip2/libzip2.
+This version is fully compatible with the previous public releases.
+
+------------------------------------------------------------------
+This file is part of bzip2/libbzip2, a program and library for
+lossless, block-sorting data compression.
+
+bzip2/libbzip2 version @BZ2_PACKAGE_VERSION_STRING@ of 6 September 2010
+Copyright (C) 1996-2010 Julian Seward <jseward@bzip.org>
+
+Please read the WARNING, DISCLAIMER and PATENTS sections in this file.
+
+This program is released under the terms of the license contained
+in the file LICENSE.
+------------------------------------------------------------------
+
+Complete documentation is available in Postscript form (manual.ps),
+PDF (manual.pdf) or html (manual.html).  A plain-text version of the
+manual page is available as bzip2.txt.
+
+... original build info ...
+
+
+Please read and be aware of the following:
+
+WARNING:
+
+   This program and library (attempts to) compress data by 
+   performing several non-trivial transformations on it.  
+   Unless you are 100% familiar with *all* the algorithms 
+   contained herein, and with the consequences of modifying them, 
+   you should NOT meddle with the compression or decompression 
+   machinery.  Incorrect changes can and very likely *will* 
+   lead to disastrous loss of data.
+
+
+DISCLAIMER:
+
+   I TAKE NO RESPONSIBILITY FOR ANY LOSS OF DATA ARISING FROM THE
+   USE OF THIS PROGRAM/LIBRARY, HOWSOEVER CAUSED.
+
+   Every compression of a file implies an assumption that the
+   compressed file can be decompressed to reproduce the original.
+   Great efforts in design, coding and testing have been made to
+   ensure that this program works correctly.  However, the complexity
+   of the algorithms, and, in particular, the presence of various
+   special cases in the code which occur with very low but non-zero
+   probability make it impossible to rule out the possibility of bugs
+   remaining in the program.  DO NOT COMPRESS ANY DATA WITH THIS
+   PROGRAM UNLESS YOU ARE PREPARED TO ACCEPT THE POSSIBILITY, HOWEVER
+   SMALL, THAT THE DATA WILL NOT BE RECOVERABLE.
+
+   That is not to say this program is inherently unreliable.  
+   Indeed, I very much hope the opposite is true.  bzip2/libbzip2 
+   has been carefully constructed and extensively tested.
+
+
+PATENTS:
+
+   To the best of my knowledge, bzip2/libbzip2 does not use any 
+   patented algorithms.  However, I do not have the resources 
+   to carry out a patent search.  Therefore I cannot give any 
+   guarantee of the above statement.
+
+... What's new info ...
